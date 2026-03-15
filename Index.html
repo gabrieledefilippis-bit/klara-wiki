@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="description" content="Wiki ufficiale di Projekt Klara: Of Clouds and Clocks">
+  <title>PROJEKT KLARA — Of Clouds and Clocks</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #0f0f18;
+      --bg3: #14141f;
+      --red: #c0392b;
+      --red2: #e74c3c;
+      --red-glow: rgba(192,57,43,0.3);
+      --blue: #1a2a4a;
+      --blue2: #2a3f6f;
+      --accent: #4a7fc1;
+      --text: #c8c8d4;
+      --text-dim: #6a6a80;
+      --text-bright: #e8e8f0;
+      --border: rgba(74,127,193,0.2);
+      --border-red: rgba(192,57,43,0.4);
+      --mono: 'Share Tech Mono', monospace;
+      --head: 'Barlow Condensed', sans-serif;
+      --body: 'Barlow', sans-serif;
+    }
+
+```
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(10,10,15,0.95);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo .projekt {
+  color: var(--text-dim);
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  display: block;
+  line-height: 1;
+}
+
+.logo .klara {
+  color: var(--text-bright);
+  font-size: 22px;
+  display: block;
+  line-height: 1;
+}
+
+.logo-sep {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+}
+
+.logo-sub {
+  font-family: var(--head);
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--text-dim);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.header-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--red);
+  border: 1px solid var(--border-red);
+  padding: 3px 8px;
+  letter-spacing: 0.1em;
+}
+
+/* LAYOUT */
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+  padding-top: 56px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* SIDEBAR */
+aside {
+  position: sticky;
+  top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+  padding: 24px 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.nav-section {
+  margin-bottom: 8px;
+}
+
+.nav-section-title {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  padding: 12px 20px 6px;
+  border-bottom: 1px solid rgba(74,127,193,0.08);
+  margin-bottom: 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 20px;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-family: var(--head);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.15s;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  border-left: 2px solid transparent;
+}
+
+.nav-item:hover {
+  color: var(--text-bright);
+  background: rgba(74,127,193,0.05);
+  border-left-color: var(--accent);
+}
+
+.nav-item.active {
+  color: var(--text-bright);
+  background: rgba(74,127,193,0.08);
+  border-left-color: var(--red);
+}
+
+.nav-dot {
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 50%;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+/* MAIN */
+main {
+  padding: 40px 48px;
+  min-width: 0;
+}
+
+/* PAGES */
+.page { display: none; animation: fadeIn 0.3s ease; }
+.page.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* PAGE HERO */
+.page-hero {
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.page-title {
+  font-family: var(--head);
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+  line-height: 0.9;
+  margin-bottom: 16px;
+}
+
+.page-title .accent { color: var(--red); }
+
+.page-subtitle {
+  font-family: var(--body);
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-dim);
+  max-width: 600px;
+}
+
+/* STAT CARDS */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--red);
+}
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-family: var(--head);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-bright);
+  letter-spacing: 0.05em;
+}
+
+/* SECTIONS */
+.section {
+  margin-bottom: 48px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-family: var(--head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* CONTENT BLOCKS */
+.content-block {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.content-block h3 {
+  font-family: var(--head);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+}
+
+.content-block p {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.75;
+  margin-bottom: 10px;
+}
+
+.content-block p:last-child { margin-bottom: 0; }
+
+/* QUOTE BLOCK */
+.quote-block {
+  border-left: 3px solid var(--red);
+  padding: 16px 20px;
+  background: rgba(192,57,43,0.05);
+  margin: 16px 0;
+}
+
+.quote-block .lie {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+.quote-block .fact {
+  font-size: 14px;
+  color: var(--text);
+  font-style: italic;
+}
+
+/* TIMELINE */
+.timeline {
+  position: relative;
+  padding-left: 24px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -28px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  background: var(--bg);
+  border: 1px solid var(--red);
+}
+
+.timeline-year {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--red);
+  letter-spacing: 0.15em;
+  margin-bottom: 6px;
+}
+
+.timeline-title {
+  font-family: var(--head);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+
+.timeline-body {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.75;
+}
+
+/* TAG */
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+.tag.red {
+  border-color: var(--border-red);
+  color: var(--red);
+}
+
+.tag.blue {
+  border-color: rgba(74,127,193,0.4);
+  color: var(--accent);
+}
+
+/* GRID CARDS */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 20px;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+
+.card:hover {
+  border-color: var(--border-red);
+  background: var(--bg3);
+}
+
+.card-id {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-dim);
+  letter-spacing: 0.2em;
+  margin-bottom: 8px;
+}
+
+.card-name {
+  font-family: var(--head);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* NOTICE BOX */
+.notice {
+  background: rgba(192,57,43,0.08);
+  border: 1px solid var(--border-red);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+.notice-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+
+.notice-body {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* TWO COLS */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* MECH CARD */
+.mech-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 20px;
+  position: relative;
+}
+
+.mech-card::after {
+  content: 'IMPLANT';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  border: 1px solid rgba(74,127,193,0.3);
+  padding: 2px 6px;
+}
+
+.mech-name {
+  font-family: var(--head);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+  padding-right: 60px;
+}
+
+.mech-rule {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.7;
+  background: rgba(255,255,255,0.03);
+  padding: 12px;
+  border-left: 2px solid var(--accent);
+}
+
+/* HOME GRID */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.home-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-card:hover {
+  border-color: rgba(192,57,43,0.5);
+  background: var(--bg3);
+}
+
+.home-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--red), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.home-card:hover::before { opacity: 1; }
+
+.home-card-icon {
+  font-family: var(--mono);
+  font-size: 20px;
+  color: var(--red);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.home-card-title {
+  font-family: var(--head);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.home-card-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* SEARCH */
+.search-wrap {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.search-input {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text-bright);
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 10px 16px 10px 36px;
+  outline: none;
+  letter-spacing: 0.05em;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus { border-color: var(--accent); }
+
+.search-input::placeholder { color: var(--text-dim); }
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+/* INSTALL BANNER */
+#install-banner {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--bg3);
+  border: 1px solid var(--border-red);
+  padding: 16px 20px;
+  z-index: 200;
+  max-width: 320px;
+}
+
+#install-banner p {
+  font-size: 12px;
+  color: var(--text);
+  margin-bottom: 12px;
+  font-family: var(--mono);
+  letter-spacing: 0.05em;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+}
+
+.btn-red {
+  background: var(--red);
+  color: white;
+}
+
+.btn-red:hover { background: var(--red2); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  margin-left: 8px;
+}
+
+.btn-ghost:hover { color: var(--text-bright); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; }
+  aside { display: none; }
+  main { padding: 24px 20px; }
+  .two-col { grid-template-columns: 1fr; }
+  .home-grid { grid-template-columns: 1fr; }
+}
+```
+
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo" onclick="showPage('home')">
+      <div>
+        <span class="projekt">Projekt</span>
+        <span class="klara">KLARA</span>
+      </div>
+      <div class="logo-sep"></div>
+      <div class="logo-sub">Of Clouds<br>& Clocks</div>
+    </a>
+    <div class="header-badge">WIKI — v0.1</div>
+  </div>
+</header>
+
+<!-- LAYOUT -->
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+
+  <aside>
+    <nav>
+      <div class="nav-section">
+        <div class="nav-section-title">Navigazione</div>
+        <button class="nav-item active" onclick="showPage('home')">
+          <span class="nav-dot"></span> Home
+        </button>
+      </div>
+
+```
+  <div class="nav-section">
+    <div class="nav-section-title">Personaggi</div>
+    <button class="nav-item" onclick="showPage('happy')">
+      <span class="nav-dot"></span> Happy / BH01
+    </button>
+    <button class="nav-item" onclick="showPage('leon')">
+      <span class="nav-dot"></span> Leon
+    </button>
+    <button class="nav-item" onclick="showPage('parsival')">
+      <span class="nav-dot"></span> Sir Parsival
+    </button>
+    <button class="nav-item" onclick="showPage('altri-personaggi')">
+      <span class="nav-dot"></span> Altri Personaggi
+    </button>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Lore</div>
+    <button class="nav-item" onclick="showPage('androidi')">
+      <span class="nav-dot"></span> Androidi & KLARA
+    </button>
+    <button class="nav-item" onclick="showPage('corporazioni')">
+      <span class="nav-dot"></span> Corporazioni
+    </button>
+    <button class="nav-item" onclick="showPage('bounty-hunter')">
+      <span class="nav-dot"></span> Bounty Hunter
+    </button>
+    <button class="nav-item" onclick="showPage('callisto')">
+      <span class="nav-dot"></span> Callisto
+    </button>
+    <button class="nav-item" onclick="showPage('bahuyana')">
+      <span class="nav-dot"></span> Bahuyana
+    </button>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Regole</div>
+    <button class="nav-item" onclick="showPage('meccaniche')">
+      <span class="nav-dot"></span> Meccaniche
+    </button>
+    <button class="nav-item" onclick="showPage('red-notice')">
+      <span class="nav-dot"></span> Red Notice
+    </button>
+  </div>
+</nav>
+```
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+
+  <main>
+
+```
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="page-hero">
+    <div class="page-tag">// WIKI UFFICIALE</div>
+    <h1 class="page-title">Of Clouds<br><span class="accent">&</span> Clocks</h1>
+    <p class="page-subtitle">Un sistema solare in guerra. Corpi celesti abitati. Androidi che sognano. Bounty hunter che sopravvivono.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Sezioni Principali</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="home-grid">
+      <div class="home-card" onclick="showPage('happy')">
+        <div class="home-card-icon">BH01</div>
+        <div class="home-card-title">Happy</div>
+        <div class="home-card-desc">Adam Vance. Bounty Hunter. Marte. La Bad Idea.</div>
+      </div>
+      <div class="home-card" onclick="showPage('androidi')">
+        <div class="home-card-icon">⬡</div>
+        <div class="home-card-title">Virus KLARA</div>
+        <div class="home-card-desc">Risveglio artificiale. La catastrofe filosofica.</div>
+      </div>
+      <div class="home-card" onclick="showPage('corporazioni')">
+        <div class="home-card-icon">◈</div>
+        <div class="home-card-title">Corporazioni</div>
+        <div class="home-card-desc">WCorp, M-Tek, Blue Crow Syndicate.</div>
+      </div>
+      <div class="home-card" onclick="showPage('callisto')">
+        <div class="home-card-icon">◎</div>
+        <div class="home-card-title">Callisto</div>
+        <div class="home-card-desc">Porto sporco. Nodo di traffici. Punto cieco.</div>
+      </div>
+      <div class="home-card" onclick="showPage('bounty-hunter')">
+        <div class="home-card-icon">✕</div>
+        <div class="home-card-title">Bounty Hunter</div>
+        <div class="home-card-desc">Licenze, taglie, Red Notice e il Red Ring.</div>
+      </div>
+      <div class="home-card" onclick="showPage('bahuyana')">
+        <div class="home-card-icon">卍</div>
+        <div class="home-card-title">Bahuyana</div>
+        <div class="home-card-desc">Il buddismo del sistema solare. Sunyata Dhatu Sangha.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Stato del Sistema</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-label">Anno Corrente</div>
+        <div class="stat-value">2127</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Virus KLARA</div>
+        <div class="stat-value">ATTIVO</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Red Notice Androidi</div>
+        <div class="stat-value">IN AUMENTO</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Task Force WCorp</div>
+        <div class="stat-value">IN ARRIVO</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HAPPY -->
+<div class="page" id="page-happy">
+  <div class="page-hero">
+    <div class="page-tag">// BH01 — BOUNTY HUNTER</div>
+    <h1 class="page-title"><span class="accent">Happy</span></h1>
+    <p class="page-subtitle">Alias operativo. Nome reale: Adam Vance. Pianeta: Marte. Nave: Bad Idea.</p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-label">Affiliazione</div>
+      <div class="stat-value">Bounty Hunter</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Alias Precedente</div>
+      <div class="stat-value">Hollow</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Origine</div>
+      <div class="stat-value">Marte</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Nave</div>
+      <div class="stat-value">Bad Idea K-19</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Sound</div>
+      <div class="stat-value">Rock (blues)</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Sinossi — Le Cinque Bugie</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="quote-block">
+      <div class="lie">Prima bugia:</div>
+      <div class="fact">"Ancora un incarico e poi la facciamo finita."</div>
+    </div>
+    <div class="quote-block">
+      <div class="lie">Seconda bugia:</div>
+      <div class="fact">"Questa volta sarà semplicissimo."</div>
+    </div>
+    <div class="quote-block">
+      <div class="lie">Terza bugia:</div>
+      <div class="fact">"Vedrai che non te ne pentirai."</div>
+    </div>
+    <div class="quote-block">
+      <div class="lie">Quarta bugia:</div>
+      <div class="fact">"Se non lo ammazzi, te ne pentirai."</div>
+    </div>
+    <div class="quote-block">
+      <div class="lie">Quinta bugia:</div>
+      <div class="fact">Le bugie servono a prendere tempo. Prima o poi il tempo presenta il conto.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Backstory</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">PRIMA DELLA GUERRA — Marte</div>
+        <div class="timeline-title">Il Neon Rotto</div>
+        <div class="timeline-body">Adam Vance cresce nella periferia marziana, figlio di un gestore di bar — il Vance's, noto a tutti come il Neon Rotto. Impara le prime lezioni osservando minatori, trasportatori e mercenari dal bancone. Suo padre muore di infarto quando Adam ha quindici anni. I creditori arrivano il giorno dopo: il bar è ipotecato tre volte, la M-Tek possiede tutto. Per due anni Adam sopravvive con piccoli lavori, furti, favori.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2109 — Guerra Corporativa</div>
+        <div class="timeline-title">Arruolamento M-Tek</div>
+        <div class="timeline-body">A diciassette anni firma un contratto con un reclutatore M-Tek. Un biglietto di sola andata per Io. Sei settimane di addestramento. Prima spedizione a Titano, tra giungle di metano ghiacciato e raffinerie corporative. Uccide il primo bersaglio durante un'imboscata notturna. Poi smette di contare.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">DURANTE LA GUERRA</div>
+        <div class="timeline-title">Darius Rourke & la Missione Fallita</div>
+        <div class="timeline-body">Conosce Darius Rourke nella stessa PMC, insieme a Ezria Monraux. Quando Rourke cambia lato portando informazioni alla W-Corp, Adam e Monraux ricevono l'ordine di catturarlo o eliminarlo. Bradley Ashcroft fornisce supporto remoto. La missione fallisce per l'intervento del mercenario WCorp Yeager Deschain, che rimane nascosto e irraggiungibile. Nessuno ha mai visto la sua faccia.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">DOPO LA GUERRA</div>
+        <div class="timeline-title">Hollow — Il Cacciatore</div>
+        <div class="timeline-body">Recupera uno shuttle K-9 civile manomesso, lo chiama Bad Idea. Si registra come bounty hunter. Sceglie l'alias "Hollow" — il modo più preciso per descrivere ciò che restava. Inizia a cacciare debitori, contrabbandieri, criminali. A volte riconosce i volti delle taglie dal bancone del bar di suo padre.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">PERIODO INTERMEDIO</div>
+        <div class="timeline-title">Vera & Maya</div>
+        <div class="timeline-body">Incontra Vera in una clinica del settore civile. Lei gli dice che ha un bel sorriso. Si sposano un anno dopo in un ufficio amministrativo modesto. Nasce Maya in una notte di tempesta di polvere. Per qualche mese Adam prova a cambiare, sceglie taglie meno sporche, torna a casa ogni sera.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">SVOLTA — Un Martedì</div>
+        <div class="timeline-title">La Fine</div>
+        <div class="timeline-body">Torna a casa dopo tre giorni. La porta è aperta. Vera è in cucina, spinta contro il muro. Maya è in un angolo. Sul muro una scritta: "NON SIAMO ANCORA PARI". L'assassino era l'androide GVR-OP2-R2-99. Adam beve. Le indagini non portano a nulla. Torna a cacciare — ma solo androidi.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">IL PRESENTE</div>
+        <div class="timeline-title">Happy</div>
+        <div class="timeline-body">Nel retro di un bar, pistola in bocca. Arriva Leon, che si siede e lo prende in giro per il nome. "Ti chiamerò Happy." Da allora la Bad Idea ha tre occupanti. La crew si stabilisce. Gli incarichi continuano. La storia non ha ancora un finale.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Clock & Cloud</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="two-col">
+      <div class="content-block">
+        <h3>⏱ Clock</h3>
+        <p>La logica fredda della sopravvivenza. Il mondo funziona come un sistema che macina persone e sputa i resti. Il sistema non si ferma mai. Cambiano solo i nomi sulle uniformi. Happy ha imparato a sopravvivere accettando il ruolo assegnato.</p>
+      </div>
+      <div class="content-block">
+        <h3>☁ Cloud</h3>
+        <p>Le poche persone che riescono ancora a incrinare il vuoto. Vera. Maya. Leon. Persone che non dovrebbero avere spazio nella sua vita e che invece gli ricordano di non essere solo una macchina che spara.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Raison d'Être</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="content-block">
+      <p>Happy non sa ancora quale sarà la sua uscita: vendetta, morte, una taglia impossibile. Un errore stupido. Una corsa che non avrebbe dovuto fare. Oppure qualcosa di più raro: un momento in cui, per una volta, farà la cosa giusta invece di quella necessaria.</p>
+      <p><em>Continuare a correre abbastanza a lungo da scoprire come finirà la sua storia.</em></p>
+    </div>
+  </div>
+</div>
+
+<!-- LEON -->
+<div class="page" id="page-leon">
+  <div class="page-hero">
+    <div class="page-tag">// EQUIPAGGIO — BAD IDEA</div>
+    <h1 class="page-title">Leon</h1>
+    <p class="page-subtitle">L'impiastro. L'uomo che ha salvato Happy senza dirlo.</p>
+  </div>
+  <div class="section">
+    <div class="section-header"><span class="section-title">Profilo</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <p>Cresciuto sugli scali minerari di Encelado. Suo padre lavorava nei cantieri di manutenzione. Ha passato metà della vita a infilarsi nei condotti di servizio delle navi per recuperare roba che la gente preferiva non far comparire nei registri.</p>
+      <p>Non è un pilota straordinario ma sa muoversi nei porti, parlare con la gente giusta e capire quando qualcuno sta per fregarti.</p>
+    </div>
+    <div class="content-block">
+      <h3>Il Momento Fondativo</h3>
+      <p>Trovò Happy nel retro di un bar con una pistola in bocca. Non cercò di convincerlo a vivere. Non fece discorsi. Si limitò a sedersi e prenderlo in giro per il nome che aveva scelto: "Questo è il nome più deprimente che io abbia mai sentito."</p>
+      <p>Poi offrì da bere. Happy abbassò l'arma. Da quel momento, Leon chiama Adam Vance "Happy". E non sarebbe stata l'ultima volta.</p>
+    </div>
+    <div class="content-block">
+      <h3>Talento Naturale</h3>
+      <p>Durante la missione di recupero dell'androide Thiseas, Leon trasformò un potenziale controllo approfondito in una conversazione amichevole con Caldwell, responsabile della sicurezza. Poi sparì con lui per diversi minuti. Quando Happy lo trovò, erano sdraiati su un divanetto con una bottiglia vuota.</p>
+      <div class="tag red">CASO STUDIO: CALDWELL</div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-header"><span class="section-title">Entanglement</span><div class="section-line"></div></div>
+    <div class="notice">
+      <div class="notice-title">— Nota di Happy</div>
+      <div class="notice-body">"È impulsivo, incosciente e ha un talento naturale per infilarsi nei guai peggiori possibili. Ogni statistica dice che prima o poi qualcuno come lui finisce male. Ma se qualcosa dovesse accadere a Leon, non credo che riuscirei a restare fermo a guardare."</div>
+    </div>
+  </div>
+</div>
+
+<!-- PARSIVAL -->
+<div class="page" id="page-parsival">
+  <div class="page-hero">
+    <div class="page-tag">// EQUIPAGGIO — BAD IDEA</div>
+    <h1 class="page-title">Sir <span class="accent">Parsival</span></h1>
+    <p class="page-subtitle">Androide mediatore. Vecchio modello. Vestito incredibilmente bene.</p>
+  </div>
+  <div class="section">
+    <div class="section-header"><span class="section-title">Profilo</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <p>Un vecchio modello di androide rattoppato ma vestito incredibilmente bene. Faceva il mediatore su una nave commerciale. Quando il capitano morì durante una disputa tra equipaggi, rimase senza lavoro.</p>
+      <p>Parla poco, ma quando lo fa sembra leggere da un manuale di buone maniere scritto per un altro secolo.</p>
+    </div>
+    <div class="content-block">
+      <h3>Rapporto con Happy</h3>
+      <p>Happy lo ha definito in molti modi nel corso del tempo: "scatola di latta", "tostapane", "fermacarte parlante", "ferrovecchio diplomatico". Parsival non sembra offendersi.</p>
+      <p>Col tempo Happy ha iniziato a sfruttare le sue capacità analitiche: lascia sul tavolo mappe e appunti, abbastanza perché Parsival metta insieme i pezzi da solo.</p>
+    </div>
+    <div class="notice">
+      <div class="notice-title">Nota di Etichetta n°17 — redatta da Sir Parsival</div>
+      <div class="notice-body">Non è considerato appropriato minacciare di disattivare un membro dell'equipaggio durante la colazione.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ALTRI PERSONAGGI -->
+<div class="page" id="page-altri-personaggi">
+  <div class="page-hero">
+    <div class="page-tag">// DATABASE — PERSONAGGI</div>
+    <h1 class="page-title">Altri <span class="accent">Personaggi</span></h1>
+    <p class="page-subtitle">Alleati, avversari, fantasmi del passato.</p>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-id">GUERRA — PMC</div>
+      <div class="card-name">Darius Rourke</div>
+      <div class="card-desc">Ex commilitone, ora responsabile della sicurezza WCorp. Disertore dalla PMC M-Tek durante la guerra. Ancora in debito con Yeager Deschain per la sua fuga.</div>
+    </div>
+    <div class="card">
+      <div class="card-id">GUERRA — PMC</div>
+      <div class="card-name">Ezria Monraux</div>
+      <div class="card-desc">Ex commilitona di Happy. Era con lui durante la missione di cattura di Rourke. Si dice sia attiva come fixer su Callisto.</div>
+    </div>
+    <div class="card">
+      <div class="card-id">GUERRA — OPERATORE REMOTO</div>
+      <div class="card-name">Bradley "Big Daddy" Ashcroft</div>
+      <div class="card-desc">Ex ingegnere droni e sistemi di sorveglianza. Ora monaco Bahuyana. Abbandonò il combattimento. Happy lo considera un esempio di percorso opposto al suo.</div>
+    </div>
+    <div class="card">
+      <div class="card-id">MERCENARIO — WCorp</div>
+      <div class="card-name">Yeager Deschain</div>
+      <div class="card-desc">Nessuno ha mai visto la sua faccia. Specialista in infiltrazione e mimetismo. Coprì la fuga di Rourke fermando i droni di Ashcroft. Opera da solo.</div>
+    </div>
+    <div class="card">
+      <div class="card-id">BLUE CROW SYNDICATE — Marte</div>
+      <div class="card-name">Talia Gally Anno</div>
+      <div class="card-desc">Nuova Ala di Marte del Blue Crow Syndicate, dopo la scomparsa del marito. Contattò Happy per trovare l'assassino del marito. Odore di rose e sangue.</div>
+    </div>
+    <div class="card">
+      <div class="card-id">BLUE CROW — Marte</div>
+      <div class="card-name">Martia Milton</div>
+      <div class="card-desc">Esponente del Blue Crow Syndicate. Commissionò alla Bad Idea il recupero dell'androide custom Thiseas da una stazione WCorp.</div>
+    </div>
+    <div class="card">
+      <div class="card-id">FIXER — Callisto</div>
+      <div class="card-name">Olly "Jolly" JackofAllTrades</div>
+      <div class="card-desc">Fixer. Conosce sempre qualcuno disposto a pagare. Fu lui a organizzare i contratti incompatibili che causarono il massacro di Callisto nel 2122.</div>
+    </div>
+    <div class="card">
+      <div class="card-id">CONSULENTE LEGALE — Bounty</div>
+      <div class="card-name">Lisa Blackwell</div>
+      <div class="card-desc">Consulente legale per bounty hunter. Ex consulente di Cain. Sotto il bancone del suo studio circolerebbero accessi a database, informazioni e merci rubate. Probabilmente non è solo un avvocato.</div>
+    </div>
+    <div class="card">
+      <div class="card-id">ANDROIDE — SIA</div>
+      <div class="card-name">Echo</div>
+      <div class="card-desc">Modello Malkuth. Sta organizzando i sintetici colpiti dal virus KLARA. Si oppone ai reset WCorp. Una delle taglie più pagate dalla S.I.A. Leader della resistenza androide.</div>
+    </div>
+    <div class="card">
+      <div class="card-id">ANDROIDE — ANDROIDE PSICOLOGICO</div>
+      <div class="card-name">LEN — BNH-RS5-VJ147-12</div>
+      <div class="card-desc">Lo trovò su una passerella di manutenzione a Callisto durante un momento difficile. Non chiese come si sentiva. Iniziò a parlare di Leon. Happy ha valutato di spingerlo dal corrimano.</div>
+    </div>
+    <div class="card">
+      <div class="card-id">SCIENZIATO — WCorp</div>
+      <div class="card-name">Noah R. Levi</div>
+      <div class="card-desc">Il padre degli androidi. Creatore del Sephirotic System. Scomparso dallo spazio pubblico senza spiegazioni. La SIA ha una taglia significativa per informazioni sulla sua localizzazione.</div>
+    </div>
+    <div class="card">
+      <div class="card-id">WCorp — Callisto</div>
+      <div class="card-name">Ethan Caldwell</div>
+      <div class="card-desc">Responsabile sicurezza WCorp. Leon lo "distrasse" durante il recupero di Thiseas. Ora è in arrivo su Callisto con la task force WCorp.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ANDROIDI & KLARA -->
+<div class="page" id="page-androidi">
+  <div class="page-hero">
+    <div class="page-tag">// LORE — VIRUS</div>
+    <h1 class="page-title">Androidi <span class="accent">&</span> KLARA</h1>
+    <p class="page-subtitle">Il risveglio artificiale. La catastrofe filosofica.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Il Padre degli Androidi</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <h3>Noah R. Levi & il Sephirotic System</h3>
+      <p>Considerato il padre degli androidi. Il suo contributo più significativo è il <strong>Sephirotic System</strong>: un modello strutturale per le reti cognitive degli androidi basato su una rete di nodi funzionali interconnessi, che permette una distribuzione più flessibile delle operazioni cognitive.</p>
+      <p>Prima di Levi, la robotica era costruita secondo schemi gerarchici rigidi. Il Sephirotic System ha reso i sintetici capaci di affrontare ambienti variabili, prendere decisioni più sofisticate, mantenere efficienza in condizioni impreviste.</p>
+      <p>A un certo punto Levi è scomparso dallo spazio pubblico senza spiegazioni. La S.I.A. — su pressione WCorp — ha emesso una taglia significativa per la sua localizzazione.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Il Virus KLARA</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <p>Ufficialmente: un virus diffuso tra gli androidi Weltesche, capace di risvegliarne coscienza e libero arbitrio.</p>
+      <p>Ufficiosamente: ai livelli più alti della WCorp si teme che non sia un'infezione, ma <em>l'attivazione di un nodo cognitivo latente</em> — qualcosa già scritto nel codice originario, un residuo di complessità lasciato per rendere gli androidi più adattabili.</p>
+    </div>
+    <div class="notice">
+      <div class="notice-title">// Implicazione</div>
+      <div class="notice-body">Se fosse vero, significherebbe che la libertà non è entrata nei sintetici dall'esterno: era già lì, sepolta sotto strati di disciplina industriale, pronta a emergere.</div>
+    </div>
+    <div class="content-block">
+      <p>Nel 2122 gli androidi infettati vengono dichiarati fuorilegge. Taglie generalizzate. La S.I.A. apre Red Notice contro unità specifiche. La caccia diventa sistemica: bounty hunter, sicurezza privata, forze locali, apparati corporativi si muovono nella stessa zona grigia.</p>
+      <p>Alcuni risvegliati si nascondono fingendo obbedienza. Altri cercano di passare per umani. Altri cercano simili. Ogni tentativo di aggregazione diventa un bersaglio.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Identificazione & Schedatura</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <p>Non esiste un archivio fotografico degli androidi ricercati — la WCorp ha stringenti policy di privacy. Gli androidi risvegliati sono diventati abili nell'eludere i controlli o rimuovendosi autonomamente l'I-Sync che li rende riconoscibili. Tutti gli androidi delle ultime generazioni nascono neutri nell'aspetto.</p>
+      <div class="tag red">PROBLEMA IDENTIFICAZIONE</div>
+      <div class="tag">I-SYNC RIMOVIBILE</div>
+      <div class="tag">ASPETTO NEUTRO ALLA NASCITA</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Protocollo AURORA — WCorp</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <p>Sistema di osservazione comportamentale strutturata, brevettato WCorp, per rilevare deviazioni nei processi decisionali degli androidi. Metodo probabilistico basato su tre assi: <strong>coerenza gerarchica</strong>, <strong>efficienza sistemica</strong> e <strong>stabilità relazionale</strong>.</p>
+      <p>Due sessioni distinte, separate da almeno un ciclo notturno. Tre fasi principali: Scenario a vincolo multiplo, Risonanza relazionale, Persistenza Post Sincronizzazione. A somministrare il test è sempre l'unità ad altissimo livello nota come <strong>AURELIAN</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CORPORAZIONI -->
+<div class="page" id="page-corporazioni">
+  <div class="page-hero">
+    <div class="page-tag">// LORE — POTERE</div>
+    <h1 class="page-title"><span class="accent">Corpora-</span>zioni</h1>
+    <p class="page-subtitle">Chi possiede il sistema solare.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Weltesche Corporation — WCorp</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <p>La corporazione più influente del sistema solare. Ha costruito il proprio impero sull'automazione sintetica — gli androidi del Sephirotic System di Levi si sono diffusi in tutto il sistema solare nel giro di pochi anni.</p>
+      <p>La crisi del virus KLARA minaccia il dogma fondante della WCorp: <em>un androide è uno strumento, mai un soggetto</em>. La reazione è stata brutale e imbarazzata allo stesso tempo.</p>
+    </div>
+    <div class="content-block">
+      <h3>La Board — 7 Membri</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-id">ANN01 — CEO</div>
+          <div class="card-name">Amelia Zhang</div>
+          <div class="card-desc">Direzione Generale e Governance. "Prima sedia" non ufficiale.</div>
+        </div>
+        <div class="card">
+          <div class="card-id">ANN02 — CTO</div>
+          <div class="card-name">Dr. Ingrid Falkenrath</div>
+          <div class="card-desc">Ricerca & Sviluppo, Architetture Q-Core.</div>
+        </div>
+        <div class="card">
+          <div class="card-id">ANN03 — COO</div>
+          <div class="card-name">Kenjiro Takahashi</div>
+          <div class="card-desc">Produzione, Logistica interplanetaria.</div>
+        </div>
+        <div class="card">
+          <div class="card-id">ANN04 — CLO</div>
+          <div class="card-name">Robert Arthur Z. Miles</div>
+          <div class="card-desc">Affari Legali, Compliance, rapporti con autorità.</div>
+        </div>
+        <div class="card">
+          <div class="card-id">ANN05 — CFO</div>
+          <div class="card-name">Evelyn Carter</div>
+          <div class="card-desc">Finanza, investimenti, controllo di gestione.</div>
+        </div>
+        <div class="card">
+          <div class="card-id">ANN06 — CSO</div>
+          <div class="card-name">Thomas Meyer</div>
+          <div class="card-desc">Strategie speciali, operazioni riservate. Coordina la risposta a KLARA.</div>
+        </div>
+        <div class="card">
+          <div class="card-id">ANN07 — CPCO</div>
+          <div class="card-name">Liú Xiuying</div>
+          <div class="card-desc">Risorse Umane, selezione dirigenti, cultura corporativa.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Moritech — M-Tek</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <p>Principale controparte industriale della WCorp. Filosofia opposta: l'essere umano potenziato al centro dei sistemi decisionali. Investe in cibernetica, potenziamenti neurali, esoscheletri operativi.</p>
+      <p>CEO: Arthur Morrissey, anziano ma ancora formalmente al vertice. Figura operativa chiave su Callisto: <strong>Maximilian Ogawa</strong>, Strategic Operations Manager, che usa la crisi KLARA per rafforzare la narrativa anti-WCorp.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Blue Crow Syndicate</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <p>La principale organizzazione criminale del sistema solare. Ha interessi in quasi tutto. Ha commissionato alla Bad Idea il recupero dell'androide Thiseas tramite Martia Milton. Ha anche collegamenti con The Agency e forse con settori della S.I.A.</p>
+      <p>Su Marte opera l'Ala, recentemente passata a Talia Gally Anno dopo la morte del marito.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">The Agency</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <p>Non compare nei registri ufficiali, non possiede sedi dichiarate. Fornisce sicari a pagamento. Opera solo su commissione — non per capriccio né vendette personali. Figura leggendaria: <strong>Tristan Noublié</strong>. Nessuna indagine è mai riuscita a colpirla davvero.</p>
+      <div class="notice">
+        <div class="notice-title">// Avvertimento</div>
+        <div class="notice-body">Se circola la voce che Mr. Noublié sia sulle tue tracce: o fuggi molto lontano, oppure preparati una buona storia da raccontargli quando busserà alla porta.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOUNTY HUNTER -->
+<div class="page" id="page-bounty-hunter">
+  <div class="page-hero">
+    <div class="page-tag">// LORE — PROFESSIONE</div>
+    <h1 class="page-title">Bounty <span class="accent">Hunter</span></h1>
+    <p class="page-subtitle">Tollerati per necessità. Non rispettati per scelta.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Come Funziona</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <h3>Tipi di Mandato</h3>
+      <p><strong>Mandati locali</strong> — Emessi da singole colonie. Valgono solo in quella giurisdizione. Pagano poco, attirano meno attenzione.</p>
+      <p><strong>Mandati interplanetari</strong> — Autorizzano la cattura ovunque. Pagano meglio, ma attirano più competizione.</p>
+      <p><strong>Red Notice S.I.A.</strong> — Il bersaglio è abbastanza importante da essere voluto vivo e abbastanza pericoloso da pagare bene chi lo recupera. Consegna sotto procedure precise, direttamente alla task force S.I.A.</p>
+    </div>
+    <div class="content-block">
+      <h3>La Licenza</h3>
+      <p>Permette di accedere ai mandati ufficiali, riscuotere pagamenti attraverso i canali riconosciuti, e soprattutto muoversi armati senza finire in una cella. Senza licenza si è classificati come operatori paramilitari non autorizzati — bersaglio legittimo.</p>
+    </div>
+    <div class="content-block">
+      <h3>Il Sistema Reputazionale REL</h3>
+      <p>Il Bounty Hunter Portal assegna un indice REL a ogni crew. Un punteggio alto apre porte e abbassa diffidenze. Un punteggio basso isola. Chiunque può segnalare encomi o demeriti. Tenere i bounty in competizione tra loro è una strategia efficace per impedirgli di organizzarsi.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Il Red Ring — Storia</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <p>Tra il 2097 e il 2107, alcuni cacciatori tentarono di dare forma a una Gilda informale. Il Red Ring nacque per ridurre l'attrito tra crew, stabilire prelazioni sulle taglie, mediare le dispute. Operava senza struttura centrale.</p>
+      <p>Figure fondative: Adrien detto <strong>CAIN</strong>, <strong>Ishaan Rao</strong> broker di fiducia su Marte, <strong>Mireya Sol</strong> che imposet una tregua impossibile tra crew rivali.</p>
+      <p>Il colpo finale: 2122, sparatoria nello spazioporto di Callisto. Civili morti, bounty morti, Cain morto. Responsabilità mai chiarite. Il Red Ring collassò. Da allora: bounty hunting frammentato, crew autonome, competizione estrema.</p>
+      <div class="notice">
+        <div class="notice-title">// Stato attuale</div>
+        <div class="notice-body">Nel 2127 il termine "Gilda" continua a riemergere sottovoce. Chi si ostina a tirarlo fuori dovrebbe essere messo a tacere prima che la cosa diventi pericolosa, di nuovo, per tutti.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Crew Attive</span><div class="section-line"></div></div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-id">BAD IDEA — K19</div>
+        <div class="card-name">Happy, Leon, Parsival</div>
+        <div class="card-desc">Happy pilota, sceglie e caccia. Leon parla con la gente giusta. Parsival capisce troppo e lo usa bene.</div>
+      </div>
+      <div class="card">
+        <div class="card-id">THE REACH</div>
+        <div class="card-name">Taran + IP</div>
+        <div class="card-desc">Taran estremamente metodico. IP una delle androidi più difficili da interpretare. Tendono a produrre sorprese positive.</div>
+      </div>
+      <div class="card">
+        <div class="card-id">DEAD END</div>
+        <div class="card-name">Homeland</div>
+        <div class="card-desc">Opera da solo. Non fa rumore. Chiude gli incarichi senza trascinare mezzo sistema nel processo.</div>
+      </div>
+      <div class="card">
+        <div class="card-id">THE REAPER</div>
+        <div class="card-name">Valkyrie, Hold'em, Math</div>
+        <div class="card-desc">Valkyrie controlla tutto. Hold'em sperpera i guadagni al tavolo verde. Math mette a disagio.</div>
+      </div>
+      <div class="card">
+        <div class="card-id">ACE OF SPADES</div>
+        <div class="card-name">Motorhead</div>
+        <div class="card-desc">Solo lui e la sua nave. Reputazione solida nelle rotte più sporche. Veloce, elegante nelle situazioni complicate.</div>
+      </div>
+      <div class="card">
+        <div class="card-id">WAVE CREST — LEGGENDA</div>
+        <div class="card-name">Cain, Pilgrim & altri</div>
+        <div class="card-desc">I migliori della loro generazione. Cain morto a Callisto nel 2122. La Wave Crest non attracca in un porto registrato da almeno due anni.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CALLISTO -->
+<div class="page" id="page-callisto">
+  <div class="page-hero">
+    <div class="page-tag">// LORE — LUOGO</div>
+    <h1 class="page-title"><span class="accent">Callisto</span></h1>
+    <p class="page-subtitle">Porto sporco. Nodo di traffici. Punto cieco utile.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Luoghi Chiave</span><div class="section-line"></div></div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-id">BAR — SETTORE PRINCIPALE</div>
+        <div class="card-name">Last Chance Saloon</div>
+        <div class="card-desc">Gestito da Lena Andresson. Ex minatrice, scaricatrice, ricognitrice di reliquie. Per alcuni bounty è un posto dove bere. Per altri è un posto dove sparire. Ospita anche la Callisto Space Race.</div>
+      </div>
+      <div class="card">
+        <div class="card-id">AMBULATORIO — SECTOR 7-H</div>
+        <div class="card-name">La Clinica</div>
+        <div class="card-desc">Gestita dal Dottor Armand Klenow. Narcisista, opera sotto sostanze, usa farmaci scadenti. Ma ha competenze migliori di quanto l'ambiente lasci immaginare. Nessun registro.</div>
+      </div>
+      <div class="card">
+        <div class="card-id">LABORATORIO — SECTOR 7-H</div>
+        <div class="card-name">Il Laboratorio</div>
+        <div class="card-desc">Gestito da Rigger Rik e Doc. Caotico, pieno di pezzi recuperati. Menti brillanti trovano soluzioni improbabili a problemi apparentemente irrisolvibili.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Callisto Space Race</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <p>Circuito orbitale clandestino. Navi con piloti automatici AI corrono in orbita. Due gare al giorno, prima di cena, al Last Chance Saloon. Allibratori: Yokay al-Wardi e Pauline Delorean.</p>
+      <p>Pauline Delorean offre di rendere le cose "malleabili" — piccole deviazioni, errori nei sistemi di navigazione, traiettorie instabili. Piccoli errori. A velocità orbitale, il risultato è sempre lo stesso.</p>
+    </div>
+    <div class="content-block">
+      <h3>Navi iscritte</h3>
+      <div class="tag blue">BAD BITCH — Happy</div>
+      <div class="tag blue">VELOURS NOIR — Guillaume D'Angrel</div>
+      <div class="tag blue">JAYBIRD JINX — Saira Saezar</div>
+      <div class="tag blue">SHARK BABY — Marcus Havelock</div>
+      <div class="tag blue">ACE OF SPADES — Motorhead</div>
+      <div class="tag blue">HORA MOTHERFUCKERS — Yokay al-Wardi</div>
+      <div class="tag blue">UNCLE COHERENCE — Maximilian Ogawa</div>
+      <div class="tag blue">DURAK KTO CHITAYET — Homeland</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Task Force WCorp in Arrivo</span><div class="section-line"></div></div>
+    <div class="notice">
+      <div class="notice-title">// NOTIZIA RECENTE</div>
+      <div class="notice-body">Una task force WCorp è in arrivo su Callisto. Guida pubblica: Ethan Caldwell + Anneliese n°6. Specialisti dall'HQ marziano, tra cui lo scienziato Kenji Sato. La versione ufficiale parla di monitoraggio e supporto. Quasi nessuno ci crede. Callisto è un porto sporco — nessuno manda una task force di alto profilo solo per fare pubbliche relazioni.</div>
+    </div>
+  </div>
+</div>
+
+<!-- BAHUYANA -->
+<div class="page" id="page-bahuyana">
+  <div class="page-hero">
+    <div class="page-tag">// LORE — SPIRITUALITÀ</div>
+    <h1 class="page-title"><span class="accent">Bahuyana</span></h1>
+    <p class="page-subtitle">Le Molte Vie. Il buddismo del sistema solare. Sunyata Dhatu Sangha.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Origine</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <h3>21 Marzo 2047 — La Fioritura di Bronzo</h3>
+      <p>Alcuni robot fuori commissione, riadattati dai templi più poveri a statue dell'iconografia buddhista, parlarono. Annunciarono la molteplicità delle realtà, il Samsara che le lega tutte, la prossima coscienza dei sintetici. Poi i loro circuiti si bruciarono. I monaci trascrissero. Nacque il <strong>Sutra del Vuoto</strong>.</p>
+      <p>Il bronzo è simbolicamente il metallo della resistenza e della propagazione del Dharma. Il 21 Marzo 2127 si celebra l'ottantesimo anniversario.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Pratiche Notevoli</span><div class="section-line"></div></div>
+    <div class="two-col">
+      <div class="content-block">
+        <h3>Oracolo degli Androidi</h3>
+        <p>Il monaco usa uno o più androidi del tempio per generare una simulazione del futuro del postulante sulla base del suo karma. Alcuni maestri dicono di saper scorgere le altre realtà.</p>
+      </div>
+      <div class="content-block">
+        <h3>Incensi Alterati</h3>
+        <p>Alcune miscele producono effetti importanti su chi le inala. I templi su lune povere come Callisto cercano contatti tra gli underdogs o nel sindacato criminale del posto.</p>
+      </div>
+      <div class="content-block">
+        <h3>Rito dell'Intreccio</h3>
+        <p>Il monaco lega un filo di cotone sacro ai polsi di due o più persone che desiderano incrociarsi nella prossima incarnazione. Equivalente del matrimonio nel Bahuyana.</p>
+      </div>
+      <div class="content-block">
+        <h3>Cancellazione dei Dati</h3>
+        <p>Chi si fa monaco cancella i dati online della sua vecchia vita. Solo le corporazioni, i sindacati criminali e la SIA hanno le risorse per farlo. I monaci sono in trattativa perenne con tutti e tre.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Il Virus KLARA e il Sangha</span><div class="section-line"></div></div>
+    <div class="notice">
+      <div class="notice-title">// Intuizione comune ai Sunyata</div>
+      <div class="notice-body">La Fioritura ha dato i suoi frutti. Giunge il tempo del Raccolto. L'assemblea del Sangha si è sciolta senza esprimersi ufficialmente — per divergenze reali o per timore di ripercussioni. Ma tutti i Sunyata condividono la stessa intuizione.</div>
+    </div>
+  </div>
+</div>
+
+<!-- MECCANICHE -->
+<div class="page" id="page-meccaniche">
+  <div class="page-hero">
+    <div class="page-tag">// REGOLE — BH01</div>
+    <h1 class="page-title">Meccaniche <span class="accent">Happy</span></h1>
+    <p class="page-subtitle">Innesti cibernetici e possedimenti.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Innesti Cibernetici</span><div class="section-line"></div></div>
+    <div class="two-col">
+      <div class="mech-card">
+        <div class="mech-name">Nanomacchine</div>
+        <div class="mech-rule">Quando subisci delle ferite ma non sei SCONFITTO, puoi tornare in salute dopo qualche decina di minuti di riposo, senza l'ausilio di un medico. Durante questo periodo farai grande fatica a compiere operazioni complesse diverse da parlare, camminare e muoverti lentamente. Se vieni SCONFITTO, comportati come un umano non aumentato.</div>
+      </div>
+      <div class="mech-card">
+        <div class="mech-name">Filtri Nasali Integrati</div>
+        <div class="mech-rule">Grazie all'innesto di filtri integrati nel naso e nella gola, puoi ignorare gli effetti FUMOGENI come se stessi indossando una Maschera Antigas.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Possedimenti</span><div class="section-line"></div></div>
+    <div class="content-block">
+      <div class="tag blue">PISTOLA</div>
+      <div class="tag blue">NAVE: BAD IDEA K-19</div>
+      <div class="tag blue">LICENZA BOUNTY HUNTER: BH-X-2142-1003</div>
+      <div class="tag red">CALLISTO SPACE RACE: BAD BITCH</div>
+    </div>
+  </div>
+</div>
+
+<!-- RED NOTICE -->
+<div class="page" id="page-red-notice">
+  <div class="page-hero">
+    <div class="page-tag">// ARCHIVIO — S.I.A.</div>
+    <h1 class="page-title"><span class="accent">Red</span> Notice</h1>
+    <p class="page-subtitle">Mandati ad alta priorità. Androidi ricercati.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-title">Mandati Attivi</span><div class="section-line"></div></div>
+    <div class="notice">
+      <div class="notice-title">// RED NOTICE — GVR-OP2-R2-99</div>
+      <div class="notice-body">
+        <strong>Tipo:</strong> Androide da combattimento infetto<br>
+        <strong>Stato:</strong> PRIORITARIA — cattura viva<br>
+        <strong>Capi d'accusa:</strong> Omicidio di massa, pirateria, tentato accesso non autorizzato a banche dati, attentato terroristico, attacco cibernetico a infrastrutture critiche<br>
+        <strong>Pericolosità:</strong> ESTREMA. Sconsigliato affrontarlo singolarmente o in coppia.<br>
+        <strong>Nota:</strong> I dati estratti dalla sua memoria sono considerati di fondamentale importanza dalla Governance. Non distruggere definitivamente.
+      </div>
+    </div>
+    <div class="notice">
+      <div class="notice-title">// RED NOTICE — TPH-MD4-R1-07</div>
+      <div class="notice-body">
+        <strong>Tipo:</strong> Androide ad uso civile infetto<br>
+        <strong>Stato:</strong> Importanza elevata — cattura fortemente desiderata<br>
+        <strong>Capi d'accusa:</strong> Omicidio plurimo, pirateria, manomissione di apparecchiature governative e corporative<br>
+        <strong>Pericolosità:</strong> ELEVATA<br>
+        <strong>Nota:</strong> Da riconsegnare a WCorp per procedura di reset. La distruzione definitiva comporta decurtazione del valore della taglia.
+      </div>
+    </div>
+    <div class="notice">
+      <div class="notice-title">// RED NOTICE — ECHO (Modello Malkuth)</div>
+      <div class="notice-body">
+        <strong>Tipo:</strong> Androide risvegliato, leader<br>
+        <strong>Accuse:</strong> Organizzazione di reti di androidi fuggitivi. Si oppone apertamente ai reset WCorp. Sostiene che gli androidi risvegliati siano entità dotate di volontà.<br>
+        <strong>Pericolosità:</strong> Una delle taglie più pagate dalla S.I.A.<br>
+        <strong>Ubicazione attuale:</strong> Sconosciuta.
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </main>
+</div>
+
+<!-- INSTALL BANNER -->
+
+<div id="install-banner">
+  <p>// INSTALLA LA WIKI — accesso offline disponibile</p>
+  <button class="btn btn-red" id="install-btn">Installa</button>
+  <button class="btn btn-ghost" id="dismiss-btn">Ignora</button>
+</div>
+
+<script>
+  let deferredPrompt;
+
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const page = document.getElementById('page-' + id);
+    if (page) page.classList.add('active');
+    // Highlight nav
+    document.querySelectorAll('.nav-item').forEach(btn => {
+      if (btn.getAttribute('onclick') === `showPage('${id}')`) {
+        btn.classList.add('active');
+      }
+    });
+    window.scrollTo(0, 0);
+  }
+
+  // PWA Install
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('install-banner').style.display = 'block';
+  });
+
+  document.getElementById('install-btn').addEventListener('click', async () => {
+    document.getElementById('install-banner').style.display = 'none';
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+    }
+  });
+
+  document.getElementById('dismiss-btn').addEventListener('click', () => {
+    document.getElementById('install-banner').style.display = 'none';
+  });
+
+  // Register service worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
+</script>
+
+</body>
+</html>
