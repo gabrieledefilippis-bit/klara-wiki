@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#0a0a0f"/>
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#1a2a4a" stroke-width="2"/>
+  <circle cx="256" cy="256" r="140" fill="none" stroke="#2a3f6f" stroke-width="1"/>
+  <!-- Red star/cross -->
+  <line x1="256" y1="96" x2="256" y2="416" stroke="#c0392b" stroke-width="3"/>
+  <line x1="96" y1="256" x2="416" y2="256" stroke="#c0392b" stroke-width="3"/>
+  <line x1="154" y1="154" x2="358" y2="358" stroke="#c0392b" stroke-width="1.5" opacity="0.5"/>
+  <line x1="358" y1="154" x2="154" y2="358" stroke="#c0392b" stroke-width="1.5" opacity="0.5"/>
+  <!-- Center -->
+  <circle cx="256" cy="256" r="20" fill="#c0392b"/>
+  <circle cx="256" cy="256" r="10" fill="#0a0a0f"/>
+  <!-- Corner marks -->
+  <rect x="80" y="80" width="12" height="12" fill="none" stroke="#4a7fc1" stroke-width="1"/>
+  <rect x="420" y="80" width="12" height="12" fill="none" stroke="#4a7fc1" stroke-width="1"/>
+  <rect x="80" y="420" width="12" height="12" fill="none" stroke="#4a7fc1" stroke-width="1"/>
+  <rect x="420" y="420" width="12" height="12" fill="none" stroke="#4a7fc1" stroke-width="1"/>
+  <!-- Text -->
+  <text x="256" y="470" text-anchor="middle" font-family="monospace" font-size="20" fill="#4a7fc1" letter-spacing="4">KLARA</text>
+</svg>
