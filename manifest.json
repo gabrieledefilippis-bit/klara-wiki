@@ -2,7 +2,7 @@
   "name": "Projekt Klara — Of Clouds and Clocks Wiki",
   "short_name": "KLARA WIKI",
   "description": "Wiki ufficiale del mondo di Projekt Klara: Of Clouds and Clocks",
-  "start_url": "/index.html",
+  "start_url": "/klara-wiki/index.html",
   "display": "standalone",
   "background_color": "#0a0a0f",
   "theme_color": "#0a0a0f",
